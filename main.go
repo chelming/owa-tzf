@@ -18,8 +18,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
     defer resp.Body.Close()
     bodyBytes, err := ioutil.ReadAll(resp.Body)
     bodyString := string(bodyBytes)
-    re := regexp.MustCompile("TZID:UTC")
-    calendar := re.ReplaceAllString(bodyString, "TZID:"+os.Getenv("TZID"))
+    re := regexp.MustCompile("TZID=UTC")
+    calendar := re.ReplaceAllString(bodyString, "TZID="+os.Getenv("TZID"))
     fmt.Fprintf(w, "%s", calendar)
 }
 
